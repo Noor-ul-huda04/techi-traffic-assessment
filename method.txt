@@ -1,0 +1,54 @@
+METHOD - Part 1 (Real Data: techi_articles.csv)
+
+Collection
+
+On 3 Oct 2026, I opened the six section pages under techi.com/category/: AI, Markets, Crypto, Breakthroughs, Policy, and Guides.
+
+The pages were public and did not require a login. I loaded them one at a time, with about 2 seconds between page loads.
+
+From each section page, I took the first 20 articles in the order shown, giving 120 rows in total.
+
+url, headline, author, and date_shown were copied exactly as displayed. `section` is the section page where the article was found.
+
+Coding rules
+
+headline_word_count: Headline split on spaces.
+
+contains_a_number: 1 if the headline contains any digit. Years count; written numbers do not.
+
+names_a_company: 1 if the headline names a company, product, or stock ticker. Agencies such as FTC and NSA, coins such as Ether and Zcash, and open-source projects are coded as 0. Doubtful cases such as JAX, Worldcoin, Xinference, and Fenghe are also coded as 0.
+
+format: Judged from the headline only:
+- news = something new happened or shipped
+- analysis = forecast, valuation, or argument
+- explainer = background
+- guide = how-to, checklist, or best-of
+- review = product review
+
+Checks
+
+The CSV is UTF-8. The first save was Windows-1252.
+
+Word counts and digit flags were recomputed in the Checks sheet of analysis.xlsx.
+
+The checks show:
+- 120 rows
+- 0 blanks
+- 0 word-count mismatches
+- 0 digit-flag mismatches
+
+Reproduce
+
+The calculations can be checked in analysis.xlsx.
+
+The same steps are available in analysis.py and analysis.ipynb. The two figures were generated from the Jupyter Notebook (analysis.ipynb).
+
+Sample limits
+
+- The 20 newest articles cover different time spans: 12 days for AI and 206 days for Guides.
+- The oldest row is 11 Mar 2026, so this sample does not cover Nov 2025 or Feb 2026.
+- Relative dates such as "5 days ago" were counted back from 3 Oct 2026, so they may be off by one day.
+- Three articles appear in two sections, giving 120 rows but 117 unique URLs.
+- I assumed the pages were ordered newest first. Markets contains one "1 day ago" row and then jumps to 19 Aug.
+- "Dr Layloma Rashid" and "Layloma Rashid" appear to refer to the same person, but both names were kept exactly as shown.
+- format and names_a_company are based on judgement rather than a measured field.
